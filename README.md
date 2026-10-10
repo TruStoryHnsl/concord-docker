@@ -17,16 +17,18 @@ Concord ships as **two deliberately different products from two repositories**:
 
 | | This repo — `concord-docker` | `concord-native` (private) |
 |---|---|---|
-| Product | Self-hostable server + **browser** client, Discord-style UI | Native desktop / mobile apps, **p2p-messenger-first**, built on their own Rust mesh engine |
-| Runs on | Any Docker host | Your devices (Tauri desktop, mobile shells) |
-| Connectivity | Domain hosting: Matrix + LiveKit + TURN behind Caddy | Peer-to-peer mesh; shows the Discord-style UI when portaling into a Docker instance |
+| Product | Self-hostable server + **browser** client, Discord-style UI | Native desktop / mobile **client** for this stack and for any Matrix homeserver |
+| Runs on | Any Docker host | Your devices (Tauri desktop; mobile builds follow Linux) |
+| Connectivity | Domain hosting: Matrix + LiveKit + TURN behind Caddy | Connects to an existing server: a Concord Docker instance (full feature set) or a plain Matrix homeserver (rooms + DMs) |
 
-The two UIs are intentionally different — the split exists precisely so the
-native app could become a p2p messenger first while this edition stays the
-browser product. They interoperate: native clients can join a Docker instance
-as a source, and this stack doubles as a support pillar for the native apps'
-mesh (the Reticulum entrypoint service, relay, and per-user roaming store live
-here). The repos are developed independently — there is no automated mirror
+As of 2026-10-09 the native app is a **plain client**: it signs in to an
+existing homeserver and shows the same Discord-style UI this edition serves in
+the browser. Point it at a Concord Docker instance and servers, channels, voice
+and invites light up; point it at any other Matrix homeserver and you get a
+standard Matrix client. The earlier p2p-messenger-first native program
+continues on `concord-native`'s `beta` branch; this stack's mesh support
+services (Reticulum entrypoint, relay, per-user roaming store) remain for that
+line. The repos are developed independently — there is no automated mirror
 between them.
 
 ## What is included
